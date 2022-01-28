@@ -48,8 +48,11 @@ pipeline {
                     }
                     stage("Paso 5: Descargar Nexus"){
                         sh 'ls -laht DevOpsUsach2020-0.0.1.jar'
+                        sh 'md5sum DevOpsUsach2020-0.0.1.jar'
+                        sh 'rm DevOpsUsach2020-0.0.1.jar'
                         sh 'curl -X GET -u $NEXUS_USER:$NEXUS_PASSWORD "http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar" -O'
                         sh 'ls -laht DevOpsUsach2020-0.0.1.jar'
+                        sh 'md5sum DevOpsUsach2020-0.0.1.jar'
                     }
                     stage("Paso 6: Levantar Artefacto Jar"){
                         sh 'nohup java -jar DevOpsUsach2020-0.0.1.jar & >/dev/null'

@@ -1,0 +1,4 @@
+ls: cannot access 'ls': No such file or directory
+ls: cannot access 'bash': No such file or directory
+ls: cannot access 'ls': No such file or directory
+/usr/bin/ls: /usr/bin/ls: cannot execute binary file

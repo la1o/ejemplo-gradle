@@ -44,7 +44,8 @@ def call(){
         sh 'md5sum DevOpsUsach2020-0.0.1.jar'
     }
     stage("Paso 6: Levantar Artefacto Jar"){
-        sh 'timeout 30 $(which nohup) java -jar DevOpsUsach2020-0.0.1.jar & >/dev/null'
+        //sh 'timeout 30 $(which nohup) java -jar DevOpsUsach2020-0.0.1.jar & >/dev/null'
+        sh 'nohup java -jar DevOpsUsach2020-0.0.1.jar &'
     }
     stage("Paso 7: Testear Artefacto - Dormir(Esperar 20sg) "){
         sh "sleep 20 && curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"

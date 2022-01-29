@@ -1,10 +1,4 @@
 def call(){
-/*
-	forma de invocación de método call:
-	def ejecucion = load 'script.groovy'
-	ejecucion.call()
-*/
-def call(){
     stage("Paso 1: Compilar"){
         sh "mvn clean compile -e"
     }
@@ -58,8 +52,6 @@ def call(){
     stage("Paso 9: Testear Artefacto - Dormir(Esperar 20sg) "){
         sh "sleep 20 && curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
     }
-}
-return this;
 }
 
 return this;

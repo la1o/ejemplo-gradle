@@ -15,8 +15,7 @@ pipeline {
         stage("Pipeline"){
             steps {
                 script{
-                  switch(params.compileTool)
-                    {
+                  switch(params.compileTool) {
                         case 'Maven':
                             def ejecucion = load 'maven.groovy'
                             ejecucion.call()

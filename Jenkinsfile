@@ -23,8 +23,9 @@ pipeline {
                         }
                     }
                     stage("Paso 3: Curl Springboot Gradle sleep 20"){
-                        sh "gradle bootRun&"
+                        sh "timeout -k 30 gradle bootRun&"
                         sh "sleep 20 && curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
+                        sh "sleep 10"
                     }
                     stage("Paso 4: Subir Nexus"){
                         nexusPublisher nexusInstanceId: 'nexus',

@@ -32,7 +32,7 @@ pipeline {
 
             post{
                 success{
-                    slackSend color: 'good', message: "[ecabrera] [${env.JOB_NAME}] [${env.BUILD_DISPLAY_NAME}] Ejecucion Exitosa", tokenCredentialId: 'jenkins-slack-plugin'
+                    slackSend color: 'good', message: "[ecabrera] [${env.JOB_NAME}] [${env.BUILD_DISPLAY_NAME}] Ejecucion Exitosa con ${params.compileTool}", tokenCredentialId: 'jenkins-slack-plugin'
                 }
 
                 failure{

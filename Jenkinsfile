@@ -3,6 +3,7 @@ pipeline {
     environment {
         NEXUS_USER      = credentials('NEXUS-USER')
         NEXUS_PASSWORD = credentials('NEXUS-PASS')
+        TAREA = ""
     }
     parameters {
         choice(
@@ -15,7 +16,7 @@ pipeline {
         stage("Pipeline"){
             steps {
                 script{
-                    sh "env"
+                    sh "printenv"
                     switch(params.compileTool) {
                         case 'Maven':
                             def ejecucion = load 'maven.groovy'
@@ -25,17 +26,17 @@ pipeline {
                             def ejecucion = load 'gradle.groovy'
                             ejecucion.call()
                         break;
-                    }
+                    }                    
                 }
             }
 
             post{
                 success{
-                    slackSend color: 'good', message: "[ecabrera] [${JOB_NAME}] [${BUILD_TAG}] Ejecucion Exitosa", teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'jenkins-slack-plugin'
+                    slackSend color: 'good', message: "[ecabrera] [${env.JOB_NAME}] [${env.BUILD_DISPLAY_NAME}] Ejecucion Exitosa", tokenCredentialId: 'jenkins-slack-plugin'
                 }
 
                 failure{
-                    slackSend color: 'danger', message: "[ecabrera] [${env.JOB_NAME}] [${BUILD_TAG}] Ejecucion fallida en stage [${env.TAREA}]", teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'jenkins-slack-plugin'
+                    slackSend color: 'danger', message: "[ecabrera] [${env.JOB_NAME}] [${env.BUILD_DISPLAY_NAME}] Ejecucion fallida en stage [${env.TAREA}]", tokenCredentialId: 'jenkins-slack-plugin'
                 }
             }
         }
